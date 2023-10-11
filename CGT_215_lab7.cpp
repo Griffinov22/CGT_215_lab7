@@ -37,17 +37,27 @@ int main()
 
 	// Create left wall OFFSET SO WALLS DONT COLLIDE WITH FLOOR
 	PhysicsRectangle leftWall;
-	leftWall.setSize(Vector2f(20, 580));
-	leftWall.setCenter(Vector2f(10, 290));
+	leftWall.setSize(Vector2f(20, 560));
+	leftWall.setCenter(Vector2f(10, 300));
 	leftWall.setStatic(true);
 	world.AddPhysicsBody(leftWall);
 
+	leftWall.onCollision = [&thudCount](PhysicsBodyCollisionResult result) {
+		thudCount++;
+		cout << "thud " << thudCount << endl;
+	};
+
 	// Create right wall OFFSET SO WALLS DONT COLLIDE WITH FLOOR
 	PhysicsRectangle rightWall;
-	rightWall.setSize(Vector2f(20, 580));
-	rightWall.setCenter(Vector2f(790, 290));
+	rightWall.setSize(Vector2f(20, 560));
+	rightWall.setCenter(Vector2f(790, 300));
 	rightWall.setStatic(true);
 	world.AddPhysicsBody(rightWall);
+
+	rightWall.onCollision = [&thudCount](PhysicsBodyCollisionResult result) {
+		thudCount++;
+		cout << "thud " << thudCount << endl;
+	};
 
 	// Create ceiling wall
 	PhysicsRectangle ceiling;
@@ -55,6 +65,11 @@ int main()
 	ceiling.setCenter(Vector2f(400, 10));
 	ceiling.setStatic(true);
 	world.AddPhysicsBody(ceiling);
+
+	ceiling.onCollision = [&thudCount](PhysicsBodyCollisionResult result) {
+		thudCount++;
+		cout << "thud " << thudCount << endl;
+	};
 
 	// Create center block
 	PhysicsRectangle centerBlock;
